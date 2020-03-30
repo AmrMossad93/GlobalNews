@@ -34,6 +34,7 @@ import {PrimeNGModule} from './prime-ng.module';
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

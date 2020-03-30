@@ -11,7 +11,7 @@ import {UserComponent} from '../../pages/user/user.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NewsComponent} from '../../pages/news/news.component';
 import {PrimeNGModule} from '../../prime-ng.module';
-
+import {NewsCardComponent} from '../../Widgets/news-card/news-card.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +24,8 @@ import {PrimeNGModule} from '../../prime-ng.module';
   declarations: [
     DashboardComponent,
     UserComponent,
-    NewsComponent
+    NewsComponent,
+    NewsCardComponent
 
     // RtlComponent
   ]

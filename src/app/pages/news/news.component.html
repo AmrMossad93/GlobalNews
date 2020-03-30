@@ -30,6 +30,12 @@
               </button>
             </div>
           </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <app-news-card></app-news-card>
+            </div>
+          </div>
         </p-accordionTab>
       </p-accordion>
     </div>
@@ -60,7 +66,7 @@
       </button>
     </div>
     <div class="col-md-6">
-      <button type="submit" class="btn btn-info pull-right">
+      <button type="submit" [disabled]="!categoryForm.valid" class="btn btn-info pull-right">
         <i class=" tim-icons icon-check-2"></i>
         Submit
       </button>
@@ -75,7 +81,7 @@
   <div class="typography-line">
     <blockquote>
       <p class=" text-center blockquote blockquote-danger">
-        <i class=" tim-icons icon-alert-circle-exc"></i> Are You Sure?
+        <i class=" tim-icons icon-alert-circle-exc"></i> Are You Sure To Delete This Category?
       </p>
     </blockquote>
   </div>
