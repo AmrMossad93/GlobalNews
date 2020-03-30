@@ -73,7 +73,7 @@ body .ui-accordion .ui-accordion-header a .ui-accordion-toggle-icon {
 }
 
 body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a .ui-accordion-toggle-icon {
-  color: transparent;
+  color: #fff;
 }
 
 body .ui-accordion .ui-accordion-content {
@@ -104,4 +104,9 @@ input.ng-valid {
   background: -webkit-linear-gradient(0deg, #1d8cf8 0, #3358f4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+body .ui-accordion .ui-accordion-header {
+  margin-bottom: 2px;
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../Services/category.service';
+import {ICategory} from '../../Models/category';
 
 @Component({
   selector: 'app-news',
@@ -8,6 +9,7 @@ import {CategoryService} from '../../Services/category.service';
 })
 export class NewsComponent implements OnInit {
   displayCategoryDialog: boolean = false;
+  categories: ICategory[];
 
   constructor(private categoryService: CategoryService) {
   }
@@ -22,7 +24,21 @@ export class NewsComponent implements OnInit {
 
   getAllCategories() {
     this.categoryService.getCategories().subscribe(res => {
-      console.log(res)
+      this.categories = res as ICategory[];
     })
   }
+
+  onCategorySubmit() {
+    this.addNewCategory();
+  }
+
+  addNewCategory() {
+    this.categoryService.addCategory().subscribe(res => {
+    }, error => {
+    }, () => {
+      this.displayCategoryDialog = false;
+      this.getAllCategories();
+    })
+  }
+
 }

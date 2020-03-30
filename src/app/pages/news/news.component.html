@@ -1,21 +1,16 @@
 <div class="content">
   <div class="row">
     <div class="col-md-12 mb-4">
-      <button (click)="showCategoryDialog()" class="btn btn-info pull-right">
-        <i class=" tim-icons icon-tap-02"></i>
+      <button (click)="showCategoryDialog(); categoryForm.resetForm()" class="btn btn-info pull-right">
+        <i class="tim-icons icon-simple-add"></i>
         Add New Category
       </button>
     </div>
     <div class="col-md-12">
-      <p-accordion>
-        <p-accordionTab header="Header 1">
-          Content 1
-        </p-accordionTab>
-        <p-accordionTab header="Header 2">
-          Content 2
-        </p-accordionTab>
-        <p-accordionTab header="Header 3">
-          Content 3
+      <p-accordion [expandIcon]="'tim-icons icon-tap-02'" [collapseIcon]="'tim-icons icon-tap-02'">
+        <p-accordionTab *ngFor="let category of categories"
+                        header="{{category.categoryNameEn}} ({{category.categoryNameAr}})">
+          Content
         </p-accordionTab>
       </p-accordion>
     </div>
@@ -25,32 +20,32 @@
           [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
-  <div>
-    <form #categoryForm="ngForm" class="row">
-      <div class="col-md-6 form-group">
-        <label for="categoryNameAr" [class.no-validation-error]="categoryNameAr.valid"
-               [class.validation-error]="categoryNameAr.invalid && categoryNameAr.touched">Category Name Arabic</label>
-        <input type="text" class="form-control" id="categoryNameAr" #categoryNameAr="ngModel" name="categoryNameAr"
-               [(ngModel)]="categoryService.category.categoryNameAr" required>
-      </div>
-      <div class="col-md-6 form-group">
-        <label for="categoryNameEn"  [class.no-validation-error]="categoryNameEn.valid"
-               [class.validation-error]="categoryNameEn.invalid && categoryNameEn.touched">Category Name English</label>
-        <input type="text" class="form-control" id="categoryNameEn" #categoryNameEn="ngModel" name="categoryNameEn"
-               [(ngModel)]="categoryService.category.categoryNameEn" required>
-      </div>
-      <div class="col-md-6">
-        <button type="submit" class="btn btn-secondary">
-          <i class=" tim-icons icon-refresh-02"></i>
-          Reset
-        </button>
-      </div>
-      <div class="col-md-6">
-        <button type="submit" class="btn btn-info pull-right">
-          <i class=" tim-icons icon-check-2"></i>
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>
+
+  <form #categoryForm="ngForm" class="row" (submit)="onCategorySubmit()" autocomplete="off">
+    <div class="col-md-6 form-group">
+      <label for="categoryNameAr" [class.no-validation-error]="categoryNameAr.valid"
+             [class.validation-error]="categoryNameAr.invalid && categoryNameAr.touched">Category Name Arabic</label>
+      <input type="text" class="form-control" id="categoryNameAr" #categoryNameAr="ngModel" name="categoryNameAr"
+             [(ngModel)]="categoryService.category.categoryNameAr" required>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="categoryNameEn" [class.no-validation-error]="categoryNameEn.valid"
+             [class.validation-error]="categoryNameEn.invalid && categoryNameEn.touched">Category Name English</label>
+      <input type="text" class="form-control" id="categoryNameEn" #categoryNameEn="ngModel" name="categoryNameEn"
+             [(ngModel)]="categoryService.category.categoryNameEn" required>
+    </div>
+    <div class="col-md-6">
+      <button type="button" (click)="categoryForm.resetForm()" class="btn btn-secondary">
+        <i class=" tim-icons icon-refresh-02"></i>
+        Reset
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-info pull-right">
+        <i class=" tim-icons icon-check-2"></i>
+        Submit
+      </button>
+    </div>
+  </form>
+
 </p-dialog>
