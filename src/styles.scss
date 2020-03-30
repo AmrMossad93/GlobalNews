@@ -2,3 +2,84 @@
 * {
   outline: none;
 }
+
+body .ui-dialog .ui-dialog-content {
+  background-color: #1e1e27;
+  color: #333333;
+  border: 1px solid #1e1e27;
+  padding: 0.571em 1em;
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+  border: 1px solid #ec250d;
+  border-bottom-color: rgb(200, 200, 200);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  background: linear-gradient(0deg, #ec250d 0, #fd5d93 100%);
+  color: white;
+  padding: 1em;
+  font-weight: 700;
+  border-bottom: 0 none;
+}
+
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon span {
+  width: auto;
+  color: white;
+}
+
+.form-group label {
+  color: rgba(255, 255, 255, .6);
+  font-size: .7500000025rem;
+  margin-bottom: 5px;
+}
+
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2em #ec250d;
+}
+
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a {
+  background: linear-gradient(0deg, #ec250d 0, #fd5d93 100%);
+  border: 1px solid #ec250d;
+  color: #ffffff;
+}
+
+body .ui-accordion .ui-accordion-header a:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2em #ec250d;
+}
+
+body .ui-accordion .ui-accordion-header a {
+  padding: 0.571em 1em;
+  border: 1px solid #ec250d;
+  background: linear-gradient(0deg, #ec250d 0, #fd5d93 100%);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 3px;
+  -webkit-transition: background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a {
+  background: linear-gradient(0deg, #fd5d93 0, #ec250d 100%);
+  border: 1px solid #fd5d93;
+  color: #fff;
+}
+
+body .ui-accordion .ui-accordion-header a .ui-accordion-toggle-icon {
+  color: #fff;
+}
+
+body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a .ui-accordion-toggle-icon {
+  color: transparent;
+}
+
+body .ui-accordion .ui-accordion-content {
+  padding: 0.571em 1em;
+  border: 1px solid #fd5d93;
+  background-color: #1e1e25;
+  color: #333333;
+  padding: 0.571em 1em;
+}

@@ -1,3 +1,43 @@
 <div class="content">
-  <p>news works!</p>
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <button (click)="showCategoryDialog()" class="btn btn-info pull-right">
+        <i class=" tim-icons icon-simple-add"></i>
+        Add New Category
+      </button>
+    </div>
+    <div class="col-md-12">
+      <p-accordion>
+        <p-accordionTab header="Header 1">
+          Content 1
+        </p-accordionTab>
+        <p-accordionTab header="Header 2">
+          Content 2
+        </p-accordionTab>
+        <p-accordionTab header="Header 3">
+          Content 3
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
 </div>
+<p-dialog header="Godfather I" [(visible)]="displayCategoryDialog" [position]="'bottom'" [modal]="true"
+          [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+          [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+          [draggable]="false" [resizable]="false">
+  <div>
+    <form class="row">
+      <div class="col-md-6 form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</p-dialog>
