@@ -12,7 +12,7 @@
                         header="{{category.categoryNameEn}} ({{category.categoryNameAr}})">
           <div class="row">
             <div class="col-md-4">
-              <button class="btn btn-success">
+              <button (click)="showNewsDialog()" class="btn btn-success">
                 <i class="tim-icons icon-simple-add"></i>
                 Add News
               </button>
@@ -20,19 +20,19 @@
             <div class="col-md-4">
               <button class="btn btn-info text-center" (click)="populateCategoryUpdateDialog(category)">
                 <i class=" tim-icons icon-pencil"></i>
-                Update {{category.categoryNameEn}} ({{category.categoryNameAr}}) Category
+                Update Category
               </button>
             </div>
             <div class="col-md-4">
               <button (click)="populateDeleteCategory(category.categoryID)" class="btn btn-danger pull-right">
                 <i class="tim-icons icon-trash-simple"></i>
-                Delete {{category.categoryNameEn}} ({{category.categoryNameAr}}) Category
+                Delete Category
               </button>
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <app-news-card></app-news-card>
             </div>
           </div>
@@ -86,4 +86,74 @@
     </blockquote>
   </div>
   <button (click)="onDeleteCategory()" class="btn btn-block btn-danger">Submit</button>
+</p-dialog>
+
+<p-dialog header="News" [(visible)]="displayNewsDialog" [position]="'bottom'" [modal]="true"
+          [style]="{width: '75vw'}" [maximizable]="true" [baseZIndex]="10000"
+          [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+          [draggable]="false" [resizable]="false">
+  <form #newsForm="ngForm" class="row" (submit)="onNewsSubmit()">
+    <div class="col-md-6 form-group">
+      <label for="title" [class.no-validation-error]="title.valid"
+             [class.validation-error]="title.invalid && title.touched">News Title</label>
+      <input type="text" name="title" #title="ngModel" [(ngModel)]="newsService.news.title" id="title"
+             class="form-control" required>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="date" [class.no-validation-error]="date.valid"
+             [class.validation-error]="date.invalid && date.touched">Date</label>
+      <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="newsService.news.date" class="form-control"
+             required>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="author" [class.no-validation-error]="author.valid"
+             [class.validation-error]="author.invalid && author.touched">Author Name</label>
+      <input type="text" id="author" name="author" #author="ngModel" [(ngModel)]="newsService.news.author" required
+             class="form-control">
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="url">News Link</label>
+      <input type="text" id="url" name="url" #url="ngModel" [(ngModel)]="newsService.news.url" class="form-control">
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="sourceName">Source Name</label>
+      <input type="text" id="sourceName" name="sourceName" #sourceName="ngModel"
+             [(ngModel)]="newsService.news.sourceName" class="form-control">
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-6 form-group">
+      <label for="imageFile">Upload Image</label>
+      <input type="file" accept="image/*" name="image" #image="ngModel"
+             (change)="handelFileToUpload($event.target.files)" [(ngModel)]="newsService.news.image"
+             id="imageFile">
+    </div>
+    <div class="col-md-6 text-center">
+      <img style="width: 200px; height: 200px;" [src]="imageURL" class="avatar" alt="">
+    </div>
+
+    <div class="col-md-6 form-group">
+      <label for="description" [class.no-validation-error]="description.valid"
+             [class.validation-error]="description.invalid && description.touched">Card Description</label>
+      <textarea id="description" name="description" #description="ngModel" [(ngModel)]="newsService.news.description"
+                class="form-control" required></textarea>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="contentNews" [class.no-validation-error]="contentNews.valid"
+             [class.validation-error]="contentNews.invalid && contentNews.touched">Content News</label>
+      <textarea id="contentNews" name="contentNews" #contentNews="ngModel" [(ngModel)]="newsService.news.contentNews"
+                class="form-control" required></textarea>
+    </div>
+    <div class="col-md-6">
+      <button type="button" (click)="newsForm.resetForm()" class="btn btn-secondary">
+        <i class=" tim-icons icon-refresh-02"></i>
+        Reset
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button type="submit" [disabled]="!newsForm.valid" class="btn btn-info pull-right">
+        <i class=" tim-icons icon-check-2"></i>
+        Submit
+      </button>
+    </div>
+  </form>
 </p-dialog>

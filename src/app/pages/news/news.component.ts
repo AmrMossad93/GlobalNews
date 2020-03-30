@@ -3,6 +3,7 @@ import {CategoryService} from '../../Services/category.service';
 import {ICategory} from '../../Models/category';
 import {ToastrService} from 'ngx-toastr';
 import {NgForm} from '@angular/forms';
+import {NewsService} from '../../Services/news.service';
 
 @Component({
   selector: 'app-news',
@@ -11,15 +12,18 @@ import {NgForm} from '@angular/forms';
 })
 export class NewsComponent implements OnInit {
   displayCategoryDialog: boolean = false;
+  displayNewsDialog: boolean = false;
   displayDeleteCategoryDialog: boolean = false;
   categories: ICategory[];
   categoryId;
+  imageURL;
 
-  constructor(private categoryService: CategoryService, private toastr: ToastrService) {
+  constructor(private categoryService: CategoryService, private toastr: ToastrService, private newsService: NewsService) {
   }
 
   ngOnInit(): void {
     this.getAllCategories();
+    this.imageURL = '/assets/img/default-avatar.png';
   }
 
   showCategoryDialog() {
@@ -77,6 +81,30 @@ export class NewsComponent implements OnInit {
       this.displayDeleteCategoryDialog = false;
       this.toastr.error('Deleted Successfully', 'Category');
       this.getAllCategories();
+    })
+  }
+
+  showNewsDialog() {
+    this.displayNewsDialog = true;
+  }
+
+  handelFileToUpload(file: FileList) {
+    this.newsService.news.image = file.item(0);
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageURL = event.target.result;
+    };
+    reader.readAsDataURL(this.newsService.news.image);
+    console.log(this.newsService.news.image)
+  }
+
+  onNewsSubmit() {
+    this.addNews();
+  }
+
+  addNews() {
+    this.newsService.addNews().subscribe(res => {
+      console.log(res)
     })
   }
 }
