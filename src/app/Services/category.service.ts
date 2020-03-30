@@ -20,6 +20,10 @@ export class CategoryService {
   }
 
   updateCategory() {
-    return this.dataService.edit('api/Category/' + this.category.categoryID , this.category);
+    return this.dataService.edit('api/Category/' + this.category.categoryID, this.category);
+  }
+
+  deleteCategory(id) {
+    return this.dataService.delete('api/Category/', id);
   }
 }

@@ -11,7 +11,9 @@ import {NgForm} from '@angular/forms';
 })
 export class NewsComponent implements OnInit {
   displayCategoryDialog: boolean = false;
+  displayDeleteCategoryDialog: boolean = false;
   categories: ICategory[];
+  categoryId;
 
   constructor(private categoryService: CategoryService, private toastr: ToastrService) {
   }
@@ -59,6 +61,21 @@ export class NewsComponent implements OnInit {
     }, () => {
       this.displayCategoryDialog = false;
       this.toastr.info('Updated Successfully', 'Category');
+      this.getAllCategories();
+    })
+  }
+
+  populateDeleteCategory(categoryId) {
+    this.displayDeleteCategoryDialog = true;
+    this.categoryId = categoryId;
+  }
+
+  onDeleteCategory() {
+    this.categoryService.deleteCategory(this.categoryId).subscribe(res => {
+    }, error => {
+    }, () => {
+      this.displayDeleteCategoryDialog = false;
+      this.toastr.error('Deleted Successfully', 'Category');
       this.getAllCategories();
     })
   }

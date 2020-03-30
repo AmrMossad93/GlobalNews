@@ -24,7 +24,7 @@
               </button>
             </div>
             <div class="col-md-4">
-              <button class="btn btn-danger pull-right">
+              <button (click)="populateDeleteCategory(category.categoryID)" class="btn btn-danger pull-right">
                 <i class="tim-icons icon-trash-simple"></i>
                 Delete {{category.categoryNameEn}} ({{category.categoryNameAr}}) Category
               </button>
@@ -39,7 +39,6 @@
           [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
-
   <form #categoryForm="ngForm" class="row" (submit)="onCategorySubmit(categoryForm)" autocomplete="off">
     <input type="hidden" name="categoryID" [value]="categoryService.category.categoryID">
     <div class="col-md-6 form-group">
@@ -67,5 +66,18 @@
       </button>
     </div>
   </form>
+</p-dialog>
 
+<p-dialog header="Delete Category" [(visible)]="displayDeleteCategoryDialog" [position]="'bottom'" [modal]="true"
+          [style]="{width: '25vw'}" [baseZIndex]="10000"
+          [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+          [draggable]="false" [resizable]="false">
+  <div class="typography-line">
+    <blockquote>
+      <p class=" text-center blockquote blockquote-danger">
+        <i class=" tim-icons icon-alert-circle-exc"></i> Are You Sure?
+      </p>
+    </blockquote>
+  </div>
+  <button (click)="onDeleteCategory()" class="btn btn-block btn-danger">Submit</button>
 </p-dialog>
