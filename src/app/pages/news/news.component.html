@@ -1,7 +1,7 @@
 <div class="content">
   <div class="row">
     <div class="col-md-12 mb-4">
-      <button (click)="showCategoryDialog(); categoryForm.resetForm()" class="btn btn-info pull-right">
+      <button (click)="showCategoryDialog(); categoryForm.resetForm()" class="btn btn-success pull-right">
         <i class="tim-icons icon-simple-add"></i>
         Add New Category
       </button>
@@ -10,7 +10,26 @@
       <p-accordion [expandIcon]="'tim-icons icon-tap-02'" [collapseIcon]="'tim-icons icon-tap-02'">
         <p-accordionTab *ngFor="let category of categories"
                         header="{{category.categoryNameEn}} ({{category.categoryNameAr}})">
-          Content
+          <div class="row">
+            <div class="col-md-4">
+              <button class="btn btn-success">
+                <i class="tim-icons icon-simple-add"></i>
+                Add News
+              </button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-info text-center" (click)="populateCategoryUpdateDialog(category)">
+                <i class=" tim-icons icon-pencil"></i>
+                Update {{category.categoryNameEn}} ({{category.categoryNameAr}}) Category
+              </button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-danger pull-right">
+                <i class="tim-icons icon-trash-simple"></i>
+                Delete {{category.categoryNameEn}} ({{category.categoryNameAr}}) Category
+              </button>
+            </div>
+          </div>
         </p-accordionTab>
       </p-accordion>
     </div>
@@ -21,7 +40,8 @@
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
 
-  <form #categoryForm="ngForm" class="row" (submit)="onCategorySubmit()" autocomplete="off">
+  <form #categoryForm="ngForm" class="row" (submit)="onCategorySubmit(categoryForm)" autocomplete="off">
+    <input type="hidden" name="categoryID" [value]="categoryService.category.categoryID">
     <div class="col-md-6 form-group">
       <label for="categoryNameAr" [class.no-validation-error]="categoryNameAr.valid"
              [class.validation-error]="categoryNameAr.invalid && categoryNameAr.touched">Category Name Arabic</label>

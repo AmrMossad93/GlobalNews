@@ -26,7 +26,11 @@ import {PrimeNGModule} from './prime-ng.module';
     RouterModule,
     AppRoutingModule,
     PrimeNGModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      progressBar: true,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    })
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [],

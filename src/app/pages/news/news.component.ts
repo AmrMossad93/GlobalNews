@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../Services/category.service';
 import {ICategory} from '../../Models/category';
+import {ToastrService} from 'ngx-toastr';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-news',
@@ -11,7 +13,7 @@ export class NewsComponent implements OnInit {
   displayCategoryDialog: boolean = false;
   categories: ICategory[];
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -28,8 +30,12 @@ export class NewsComponent implements OnInit {
     })
   }
 
-  onCategorySubmit() {
-    this.addNewCategory();
+  onCategorySubmit(form: NgForm) {
+    if (form.value.categoryID === null) {
+      this.addNewCategory();
+    } else {
+      this.updateCategory();
+    }
   }
 
   addNewCategory() {
@@ -37,8 +43,23 @@ export class NewsComponent implements OnInit {
     }, error => {
     }, () => {
       this.displayCategoryDialog = false;
+      this.toastr.success('Submitted Successfully', 'Category');
       this.getAllCategories();
     })
   }
 
+  populateCategoryUpdateDialog(category: ICategory) {
+    this.displayCategoryDialog = true;
+    this.categoryService.category = Object.assign({}, category);
+  }
+
+  updateCategory() {
+    this.categoryService.updateCategory().subscribe(res => {
+    }, error => {
+    }, () => {
+      this.displayCategoryDialog = false;
+      this.toastr.info('Updated Successfully', 'Category');
+      this.getAllCategories();
+    })
+  }
 }
