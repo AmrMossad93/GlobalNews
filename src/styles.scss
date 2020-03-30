@@ -83,3 +83,25 @@ body .ui-accordion .ui-accordion-content {
   color: #333333;
   padding: 0.571em 1em;
 }
+
+input.ng-touched.ng-invalid {
+  border-color: #ec250d;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+input.ng-valid {
+  border-color: #1d8cf8;
+}
+
+.validation-error {
+  background: -webkit-linear-gradient(0deg, #fd5d93 0, #ec250d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.no-validation-error {
+  background: -webkit-linear-gradient(0deg, #1d8cf8 0, #3358f4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

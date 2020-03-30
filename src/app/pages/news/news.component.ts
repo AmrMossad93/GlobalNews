@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CategoryService} from '../../Services/category.service';
 
 @Component({
   selector: 'app-news',
@@ -8,13 +9,20 @@ import {Component, OnInit} from '@angular/core';
 export class NewsComponent implements OnInit {
   displayCategoryDialog: boolean = false;
 
-  constructor() {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
+    this.getAllCategories();
   }
 
   showCategoryDialog() {
     this.displayCategoryDialog = true;
+  }
+
+  getAllCategories() {
+    this.categoryService.getCategories().subscribe(res => {
+      console.log(res)
+    })
   }
 }

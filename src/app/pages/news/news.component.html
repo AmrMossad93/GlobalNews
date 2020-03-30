@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12 mb-4">
       <button (click)="showCategoryDialog()" class="btn btn-info pull-right">
-        <i class=" tim-icons icon-simple-add"></i>
+        <i class=" tim-icons icon-tap-02"></i>
         Add New Category
       </button>
     </div>
@@ -21,23 +21,36 @@
     </div>
   </div>
 </div>
-<p-dialog header="Godfather I" [(visible)]="displayCategoryDialog" [position]="'bottom'" [modal]="true"
+<p-dialog header="Category" [(visible)]="displayCategoryDialog" [position]="'bottom'" [modal]="true"
           [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
   <div>
-    <form class="row">
+    <form #categoryForm="ngForm" class="row">
       <div class="col-md-6 form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="categoryNameAr" [class.no-validation-error]="categoryNameAr.valid"
+               [class.validation-error]="categoryNameAr.invalid && categoryNameAr.touched">Category Name Arabic</label>
+        <input type="text" class="form-control" id="categoryNameAr" #categoryNameAr="ngModel" name="categoryNameAr"
+               [(ngModel)]="categoryService.category.categoryNameAr" required>
       </div>
       <div class="col-md-6 form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="categoryNameEn"  [class.no-validation-error]="categoryNameEn.valid"
+               [class.validation-error]="categoryNameEn.invalid && categoryNameEn.touched">Category Name English</label>
+        <input type="text" class="form-control" id="categoryNameEn" #categoryNameEn="ngModel" name="categoryNameEn"
+               [(ngModel)]="categoryService.category.categoryNameEn" required>
       </div>
-
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-secondary">
+          <i class=" tim-icons icon-refresh-02"></i>
+          Reset
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-info pull-right">
+          <i class=" tim-icons icon-check-2"></i>
+          Submit
+        </button>
+      </div>
     </form>
   </div>
 </p-dialog>
