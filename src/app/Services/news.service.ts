@@ -8,13 +8,15 @@ import {ICategory} from '../Models/category';
 })
 export class NewsService {
   news = {} as INews;
+
   constructor(public dataService: DataService) {
   }
 
   addNews() {
     return this.dataService.add('api/News', this.news);
   }
-  getNews(){
+
+  getNews() {
     return this.dataService.get('api/News');
   }
 }

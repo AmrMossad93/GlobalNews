@@ -20,7 +20,8 @@ export class NewsComponent implements OnInit {
   imageURL;
   categoryNewsID;
   categoryNewsName;
-  news:INews;
+  news: INews;
+
   constructor(private categoryService: CategoryService, private toastr: ToastrService, private newsService: NewsService) {
   }
 
@@ -62,6 +63,12 @@ export class NewsComponent implements OnInit {
   populateCategoryUpdateDialog(category: ICategory) {
     this.displayCategoryDialog = true;
     this.categoryService.category = Object.assign({}, category);
+  }
+
+  populateNewsUpdateDialog(news: INews) {
+    this.displayNewsDialog = true;
+    this.imageURL = this.newsService.news.image;
+    this.newsService.news = Object.assign({}, news);
   }
 
   updateCategory() {
@@ -124,4 +131,5 @@ export class NewsComponent implements OnInit {
     }, () => {
     })
   }
+
 }
