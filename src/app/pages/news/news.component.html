@@ -32,8 +32,35 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-md-4">
-              <app-news-card></app-news-card>
+            <div class="col-md-4" *ngFor="let newsData of category.News">
+              <div class="card card-user">
+                <div class="card-body">
+                  <p class="card-text"></p>
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="javascript:void(0)">
+                      <img alt="..." class="img-thumbnail" [src]="newsData.image"/>
+
+                      <h5 class="title">{{newsData.title}}</h5>
+                    </a>
+                    <p class="description">{{newsData.author}}</p>
+                  </div>
+                  <div class="card-description">
+                    {{newsData.description}}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="button-container">
+                    <button class="btn btn-secondary btn-icon btn-round"><i class="tim-icons icon-notes"></i></button>
+                    <button class="btn btn-info btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button>
+                    <button class="btn btn-danger btn-icon btn-round"><i class="tim-icons icon-trash-simple"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </p-accordionTab>
