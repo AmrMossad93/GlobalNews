@@ -1,3 +1,5 @@
+import {ICategory} from './category';
+
 export interface INews {
   newsID: number;
   title: string;
@@ -8,4 +10,5 @@ export interface INews {
   image: File;
   contentNews: string;
   sourceName: string;
+  categoryID: number;
 }

@@ -4,5 +4,5 @@ export interface ICategory {
   categoryID: number;
   categoryNameAr: string;
   categoryNameEn: string;
-  news: INews[];
+  News: INews;
 }
