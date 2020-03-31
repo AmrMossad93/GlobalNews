@@ -12,9 +12,9 @@ import {INews} from '../../Models/news';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
-  displayCategoryDialog: boolean = false;
-  displayNewsDialog: boolean = false;
-  displayDeleteCategoryDialog: boolean = false;
+  displayCategoryDialog = false;
+  displayNewsDialog = false;
+  displayDeleteCategoryDialog = false;
   categories: ICategory[];
   categoryId;
   imageURL;
