@@ -41,7 +41,7 @@
                     <div class="block block-two"></div>
                     <div class="block block-three"></div>
                     <div class="block block-four"></div>
-                    <a href="javascript:void(0)">
+                    <a routerLink="../globalNews/{{newsData.newsID}}">
                       <img alt="..." style="width: 250px; height: 250px" class="img-thumbnail" [src]="newsData.image"/>
                       <h5 class="title">{{newsData.title}}</h5>
                     </a>
@@ -53,13 +53,14 @@
                 </div>
                 <div class="card-footer">
                   <div class="button-container">
-                    <button class="btn btn-secondary btn-icon btn-round">
+                    <button routerLink="../globalNews/{{newsData.newsID}}"
+                            class="btn m-1 btn-secondary btn-icon btn-round">
                       <i class="tim-icons icon-notes"></i>
                     </button>
-                    <button (click)="populateNewsUpdateDialog(newsData)" class="btn btn-info btn-icon btn-round">
+                    <button (click)="populateNewsUpdateDialog(newsData)" class="btn m-1 btn-info btn-icon btn-round">
                       <i class="tim-icons icon-pencil"></i>
                     </button>
-                    <button (click)="populateDeleteNews(newsData.newsID)" class="btn btn-danger btn-icon btn-round">
+                    <button (click)="populateDeleteNews(newsData.newsID)" class="btn m-1 btn-danger btn-icon btn-round">
                       <i class="tim-icons icon-trash-simple"></i>
                     </button>
                   </div>
@@ -189,6 +190,7 @@
     </div>
   </form>
 </p-dialog>
+
 <p-dialog header="Delete News" [(visible)]="displayDeleteNewsDialog" [position]="'bottom'" [modal]="true"
           [style]="{width: '25vw'}" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"

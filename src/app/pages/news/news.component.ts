@@ -39,7 +39,6 @@ export class NewsComponent implements OnInit {
   getAllCategories() {
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res as ICategory[];
-      console.log(this.categories)
     })
   }
 
