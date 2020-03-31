@@ -42,8 +42,7 @@
                     <div class="block block-three"></div>
                     <div class="block block-four"></div>
                     <a href="javascript:void(0)">
-                      <img alt="..." style="width: 200px; height: 200px" class="img-thumbnail" [src]="newsData.image"/>
-
+                      <img alt="..." style="width: 250px; height: 250px" class="img-thumbnail" [src]="newsData.image"/>
                       <h5 class="title">{{newsData.title}}</h5>
                     </a>
                     <p class="description">{{newsData.author}}</p>
@@ -60,7 +59,7 @@
                     <button (click)="populateNewsUpdateDialog(newsData)" class="btn btn-info btn-icon btn-round">
                       <i class="tim-icons icon-pencil"></i>
                     </button>
-                    <button class="btn btn-danger btn-icon btn-round">
+                    <button (click)="populateDeleteNews(newsData.newsID)" class="btn btn-danger btn-icon btn-round">
                       <i class="tim-icons icon-trash-simple"></i>
                     </button>
                   </div>
@@ -189,4 +188,17 @@
       </button>
     </div>
   </form>
+</p-dialog>
+<p-dialog header="Delete News" [(visible)]="displayDeleteNewsDialog" [position]="'bottom'" [modal]="true"
+          [style]="{width: '25vw'}" [baseZIndex]="10000"
+          [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+          [draggable]="false" [resizable]="false">
+  <div class="typography-line">
+    <blockquote>
+      <p class=" text-center blockquote blockquote-danger">
+        <i class=" tim-icons icon-alert-circle-exc"></i> Are You Sure To Delete This News?
+      </p>
+    </blockquote>
+  </div>
+  <button (click)="onDeleteNews()" class="btn btn-block btn-danger">Submit</button>
 </p-dialog>

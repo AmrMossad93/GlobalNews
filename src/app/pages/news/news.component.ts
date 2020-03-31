@@ -15,12 +15,14 @@ export class NewsComponent implements OnInit {
   displayCategoryDialog = false;
   displayNewsDialog = false;
   displayDeleteCategoryDialog = false;
+  displayDeleteNewsDialog = false;
   categories: ICategory[];
   categoryId;
   imageURL;
   categoryNewsID;
   categoryNewsName;
   news: INews;
+  newsID;
 
   constructor(private categoryService: CategoryService, private toastr: ToastrService, private newsService: NewsService) {
   }
@@ -148,12 +150,25 @@ export class NewsComponent implements OnInit {
     })
   }
 
-  getAllNews() {
-    this.newsService.getNews().subscribe(res => {
-      console.log(res)
-    }, error => {
-    }, () => {
-    })
+  // getAllNews() {
+  //   this.newsService.getNews().subscribe(res => {
+  //     console.log(res)
+  //   }, error => {
+  //   }, () => {
+  //   })
+  // }
+  populateDeleteNews(newsID) {
+    this.displayDeleteNewsDialog = true;
+    this.newsID = newsID;
   }
 
+  onDeleteNews() {
+    this.newsService.deleteNews(this.newsID).subscribe(res => {
+    }, error => {
+    }, () => {
+      this.displayDeleteNewsDialog = false;
+      this.toastr.error('Deleted Successfully', 'News');
+      this.getAllCategories();
+    })
+  }
 }

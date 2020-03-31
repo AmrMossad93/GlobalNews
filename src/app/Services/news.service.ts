@@ -23,4 +23,8 @@ export class NewsService {
   updateNews() {
     return this.dataService.edit('api/News/' + this.news.newsID, this.news);
   }
+
+  deleteNews(id) {
+    return this.dataService.delete('api/News/', id);
+  }
 }
