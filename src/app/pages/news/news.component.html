@@ -17,8 +17,8 @@
                 Add News
               </button>
             </div>
-            <div class="col-md-4">
-              <button class="btn btn-info text-center" (click)="populateCategoryUpdateDialog(category)">
+            <div class="col-md-4 text-center">
+              <button class="btn btn-info" (click)="populateCategoryUpdateDialog(category)">
                 <i class=" tim-icons icon-pencil"></i>
                 Update Category
               </button>
@@ -32,7 +32,7 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-md-4" *ngFor="let newsData of category.News">
+            <div class="col-md-3" *ngFor="let newsData of category.News">
               <div class="card card-user">
                 <div class="card-body">
                   <p class="card-text"></p>
@@ -42,7 +42,7 @@
                     <div class="block block-three"></div>
                     <div class="block block-four"></div>
                     <a href="javascript:void(0)">
-                      <img alt="..." class="img-thumbnail" [src]="newsData.image"/>
+                      <img alt="..." style="width: 200px; height: 200px" class="img-thumbnail" [src]="newsData.image"/>
 
                       <h5 class="title">{{newsData.title}}</h5>
                     </a>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="button-container">
-                    <button  class="btn btn-secondary btn-icon btn-round">
+                    <button class="btn btn-secondary btn-icon btn-round">
                       <i class="tim-icons icon-notes"></i>
                     </button>
                     <button (click)="populateNewsUpdateDialog(newsData)" class="btn btn-info btn-icon btn-round">
@@ -124,7 +124,8 @@
           [style]="{width: '75vw'}" [maximizable]="true" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
-  <form #newsForm="ngForm" class="row" (submit)="onNewsSubmit()">
+  <form #newsForm="ngForm" class="row" (submit)="onNewsSubmit(newsForm)">
+    <input type="hidden" name="newsID" [value]="newsService.news.newsID">
     <div class="col-md-6 form-group">
       <label for="title" [class.no-validation-error]="title.valid"
              [class.validation-error]="title.invalid && title.touched">News Title</label>
@@ -156,7 +157,7 @@
     <div class="col-md-6 form-group">
       <label for="imageFile">Upload Image</label>
       <input type="file" accept="image/*" name="image" #image="ngModel"
-             (change)="handelFileToUpload($event.target.files)" [(ngModel)]="newsService.news.image"
+             (change)="handelFileToUpload($event)" [(ngModel)]="newsService.news.image"
              id="imageFile">
     </div>
     <div class="col-md-6 text-center">

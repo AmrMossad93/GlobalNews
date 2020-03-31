@@ -7,7 +7,7 @@ export interface INews {
   author: string;
   description: string;
   url: string;
-  image: File;
+  image: string;
   contentNews: string;
   sourceName: string;
   categoryID: number;

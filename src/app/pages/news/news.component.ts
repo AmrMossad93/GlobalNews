@@ -27,7 +27,6 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories();
-    this.getAllNews();
     this.imageURL = '/assets/img/default-avatar.png';
   }
 
@@ -42,13 +41,6 @@ export class NewsComponent implements OnInit {
     })
   }
 
-  onCategorySubmit(form: NgForm) {
-    if (form.value.categoryID === null) {
-      this.addNewCategory();
-    } else {
-      this.updateCategory();
-    }
-  }
 
   addNewCategory() {
     this.categoryService.addCategory().subscribe(res => {
@@ -101,17 +93,49 @@ export class NewsComponent implements OnInit {
     this.newsService.news.categoryID = categoryID;
   }
 
-  handelFileToUpload(file: FileList) {
-    this.newsService.news.image = file.item(0);
+  // handelFileToUpload(file: FileList) {
+  //   this.newsService.news.image = file.item(0);
+  //   const reader = new FileReader();
+  //   reader.onload = (event: any) => {
+  //     this.imageURL = event.target.result ;
+  //     console.log(this.imageURL)
+  //   };
+  //   reader.readAsDataURL(this.newsService.news.image);
+  // }
+  handelFileToUpload(event) {
     const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imageURL = event.target.result;
-    };
-    reader.readAsDataURL(this.newsService.news.image);
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imageURL = reader.result;
+      };
+    }
   }
 
-  onNewsSubmit() {
-    this.addNews();
+  onCategorySubmit(form: NgForm) {
+    if (form.value.categoryID === null) {
+      this.addNewCategory();
+    } else {
+      this.updateCategory();
+    }
+  }
+
+  onNewsSubmit(form: NgForm) {
+    if (form.value.newsID === null) {
+      this.addNews();
+    } else {
+      this.updateNews();
+    }
+  }
+
+  updateNews() {
+    this.newsService.news.image = this.imageURL;
+    this.newsService.updateNews().subscribe(res => {
+      this.toastr.info('Updated Successfully', 'News');
+      this.displayNewsDialog = false;
+      this.getAllCategories();
+    })
   }
 
   addNews() {

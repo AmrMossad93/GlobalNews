@@ -19,4 +19,8 @@ export class NewsService {
   getNews() {
     return this.dataService.get('api/News');
   }
+
+  updateNews() {
+    return this.dataService.edit('api/News/' + this.news.newsID, this.news);
+  }
 }
