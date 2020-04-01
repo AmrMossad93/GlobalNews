@@ -15,6 +15,7 @@ export class NewsComponent implements OnInit {
   displayCategoryDialog = false;
   displayNewsDialog = false;
   displayDeleteCategoryDialog = false;
+  displayDeleteCategoryErrorDialog = false;
   displayDeleteNewsDialog = false;
   categories: ICategory[];
   categoryId;
@@ -29,6 +30,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories();
+    // this.resetCategoryForm();
     this.imageURL = '/assets/img/default-avatar.png';
   }
 
@@ -43,12 +45,13 @@ export class NewsComponent implements OnInit {
   }
 
 
-  addNewCategory() {
+  private addNewCategory(form: NgForm) {
     this.categoryService.addCategory().subscribe(res => {
     }, error => {
     }, () => {
       this.displayCategoryDialog = false;
       this.toastr.success('Submitted Successfully', 'Category');
+      this.resetCategoryForm(form);
       this.getAllCategories();
     })
   }
@@ -64,14 +67,44 @@ export class NewsComponent implements OnInit {
     this.newsService.news = Object.assign({}, news);
   }
 
-  updateCategory() {
+  private updateCategory(form: NgForm) {
     this.categoryService.updateCategory().subscribe(res => {
     }, error => {
     }, () => {
       this.displayCategoryDialog = false;
       this.toastr.info('Updated Successfully', 'Category');
+      this.resetCategoryForm(form);
       this.getAllCategories();
     })
+  }
+
+
+  resetCategoryForm(form?: NgForm) {
+    if (form != null) {
+      form.resetForm()
+    }
+    this.categoryService.category = {
+      categoryID: 0,
+      categoryNameEn: '',
+      categoryNameAr: ''
+    }
+  }
+
+  resetNewsForm(form?: NgForm) {
+    if (form != null) {
+      form.resetForm();
+    }
+    this.newsService.news = {
+      newsID: 0,
+      title: '',
+      author: '',
+      description: '',
+      url: '',
+      image: '/assets/img/default-avatar.png',
+      contentNews: '',
+      sourceName: '',
+      categoryID: 0
+    }
   }
 
   populateDeleteCategory(categoryId) {
@@ -81,7 +114,10 @@ export class NewsComponent implements OnInit {
 
   onDeleteCategory() {
     this.categoryService.deleteCategory(this.categoryId).subscribe(res => {
-    }, error => {
+    }, (error) => {
+      if (error.status === 500) {
+        this.displayDeleteCategoryErrorDialog = true;
+      }
     }, () => {
       this.displayDeleteCategoryDialog = false;
       this.toastr.error('Deleted Successfully', 'Category');
@@ -115,37 +151,43 @@ export class NewsComponent implements OnInit {
   }
 
   onCategorySubmit(form: NgForm) {
-    if (form.value.categoryID === null) {
-      this.addNewCategory();
+    if (!this.categoryService.category.categoryID) {
+      this.addNewCategory(form);
     } else {
-      this.updateCategory();
+      this.updateCategory(form);
     }
   }
 
   onNewsSubmit(form: NgForm) {
-    if (form.value.newsID === null) {
-      this.addNews();
+    if (!this.newsService.news.newsID) {
+      this.addNews(form);
     } else {
-      this.updateNews();
+      this.updateNews(form);
     }
   }
 
-  updateNews() {
+  private updateNews(form: NgForm) {
     this.newsService.news.image = this.imageURL;
     this.newsService.updateNews().subscribe(res => {
+    }, error => {
+    }, () => {
       this.toastr.info('Updated Successfully', 'News');
       this.displayNewsDialog = false;
       this.getAllCategories();
+      this.resetNewsForm(form)
     })
   }
 
-  addNews() {
+  private addNews(form: NgForm) {
     this.newsService.news.image = this.imageURL;
     this.newsService.addNews().subscribe(res => {
       this.news = res as INews;
+    }, error => {
+    }, () => {
       this.toastr.success('Added Successfully', 'News');
       this.displayNewsDialog = false;
       this.getAllCategories();
+      this.resetNewsForm(form)
     })
   }
 

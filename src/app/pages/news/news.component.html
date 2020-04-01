@@ -1,7 +1,7 @@
 <div class="content">
   <div class="row">
     <div class="col-md-12 mb-4">
-      <button (click)="showCategoryDialog(); categoryForm.resetForm()" class="btn btn-success pull-right">
+      <button (click)="showCategoryDialog(); categoryForm.resetForm();" class="btn btn-success pull-right">
         <i class="tim-icons icon-simple-add"></i>
         Add New Category
       </button>
@@ -12,7 +12,7 @@
                         header="{{category.categoryNameEn}} ({{category.categoryNameAr}})">
           <div class="row">
             <div class="col-md-4">
-              <button (click)="showNewsDialog(category.categoryID)" class="btn btn-success">
+              <button (click)="showNewsDialog(category.categoryID); newsForm.resetForm();" class="btn btn-success">
                 <i class="tim-icons icon-simple-add"></i>
                 Add News
               </button>
@@ -42,8 +42,9 @@
                     <div class="block block-three"></div>
                     <div class="block block-four"></div>
                     <a routerLink="../globalNews/{{newsData.newsID}}">
-                      <img alt="..." style="width: 250px; height: 250px" class="img-thumbnail" [src]="newsData.image"/>
-                      <h5 class="title">{{newsData.title}}</h5>
+                      <img alt="{{newsData.author}}" style="width: 250px; height: 250px" class="img-thumbnail"
+                           [src]="newsData.image"/>
+                      <h4 class="title mt-2">{{newsData.title}}</h4>
                     </a>
                     <p class="description">{{newsData.author}}</p>
                   </div>
@@ -119,12 +120,27 @@
   </div>
   <button (click)="onDeleteCategory()" class="btn btn-block btn-danger">Submit</button>
 </p-dialog>
+<p-dialog header="Delete Category" [(visible)]="displayDeleteCategoryErrorDialog" [modal]="true"
+          [style]="{width: '25vw'}" [baseZIndex]="10000"
+          [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+          [draggable]="false" [resizable]="false">
+  <div class="typography-line">
+    <blockquote>
+      <p class=" text-center blockquote blockquote-danger">
+        <i class=" tim-icons icon-alert-circle-exc"></i> Sorry There Are News In This Category
+      </p>
+    </blockquote>
+  </div>
+  <button (click)="displayDeleteCategoryErrorDialog = false ; displayDeleteCategoryDialog = false;"
+          class="btn btn-block btn-danger">Submit
+  </button>
+</p-dialog>
 
 <p-dialog header="News" [(visible)]="displayNewsDialog" [position]="'bottom'" [modal]="true"
           [style]="{width: '75vw'}" [maximizable]="true" [baseZIndex]="10000"
           [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
           [draggable]="false" [resizable]="false">
-  <form #newsForm="ngForm" class="row" (submit)="onNewsSubmit(newsForm)">
+  <form #newsForm="ngForm" class="row" (submit)="onNewsSubmit(newsForm); newsForm.resetForm()">
     <input type="hidden" name="newsID" [value]="newsService.news.newsID">
     <div class="col-md-6 form-group">
       <label for="title" [class.no-validation-error]="title.valid"

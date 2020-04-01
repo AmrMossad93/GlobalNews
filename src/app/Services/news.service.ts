@@ -27,4 +27,8 @@ export class NewsService {
   deleteNews(id) {
     return this.dataService.delete('api/News/', id);
   }
+
+  getNewsByID(id) {
+    return this.dataService.get('api/News/' + id);
+  }
 }

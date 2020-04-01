@@ -1,4 +1,56 @@
 <div class="content">
-  <p>news-details works!</p>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header text-center"><h2>{{news.title}}</h2></div>
+        <div class="card-body">
+          <blockquote>
+            <p class=" blockquote blockquote-warning">
+              {{news.contentNews}}
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body">
+          <p class="card-text"></p>
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
+            <img alt="{{news.author}}" class=" img-thumbnail" [src]="news.image"/>
+            <h5 class="title mt-2">{{news.title}}</h5>
+            <p class="description">{{news.author}}</p>
+          </div>
+          <div class="card-description">{{news.description}}</div>
+        </div>
+        <!--        <div class="card-footer">-->
+        <!--          <div class=" button-container">-->
+        <!--            <button-->
+        <!--              class=" btn btn-icon btn-round btn-facebook"-->
+        <!--              href="javascript:void(0)"-->
+        <!--            >-->
+        <!--              <i class=" fab fa-facebook"> </i>-->
+        <!--            </button>-->
+        <!--            <button-->
+        <!--              class=" btn btn-icon btn-round btn-twitter"-->
+        <!--              href="javascript:void(0)"-->
+        <!--            >-->
+        <!--              <i class=" fab fa-twitter"> </i>-->
+        <!--            </button>-->
+        <!--            <button-->
+        <!--              class=" btn btn-icon btn-round btn-google"-->
+        <!--              href="javascript:void(0)"-->
+        <!--            >-->
+        <!--              <i class=" fab fa-google-plus"> </i>-->
+        <!--            </button>-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
 </div>
 
